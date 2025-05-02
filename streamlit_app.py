@@ -53,10 +53,16 @@ if not df.empty:
     )
 
     # Apply filters
-    filtered_df = df[
-        (df['genre'].isin(selected_genres) if selected_genres else True
-    ].query("price >= @min_price and price <= @max_price")
-
+    # Apply filters
+filtered_df = df[
+    # Genre filter
+    (df['genre'].isin(genre_filter) if genre_filter else True) 
+    &  # AND operator
+    # Price range filter
+    (df['price'] >= price_range[0]) 
+    & 
+    (df['price'] <= price_range[1])
+]
     # Metrics
     col1, col2, col3 = st.columns(3)
     col1.metric("Total Books", len(filtered_df))
