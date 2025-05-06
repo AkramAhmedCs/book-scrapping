@@ -48,9 +48,9 @@ col1.metric("Total Books", len(filtered_df))
 col2.metric("Average Price", f"${filtered_df['price'].mean():.2f}")
 col3.metric("Unique Genres", filtered_df['genre'].nunique())
 
-# Data Display
+# Data Display - Modified to exclude ISBN column
 with st.expander("📄 View Raw Data"):
-    st.dataframe(filtered_df)
+    st.dataframe(filtered_df.drop(columns=['isbn'], errors='ignore'))  # Modified line
 
 # Visualizations
 st.header("📊 Visualizations")
